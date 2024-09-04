@@ -6,16 +6,17 @@ import LoginScreen from "./src/screens/LoginScreen";
 import WelcomeScreen from "./src/screens/WelcomeScreen";
 import LoaderScreen from "./src/screens/LoaderScreen";
 import CreateGroupScreen from "./src/screens/CreateGroupScreen";
-import GroupScreen from "./src/screens/GroupScreen";
+import GroupListScreen from "./src/screens/GroupListScreen";
 import CreateGrouScreen from "./src/screens/CreateGrouScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import GroupScreen from "./src/screens/GroupScreen";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Welcome">
+      <Stack.Navigator initialRouteName="home">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -44,6 +45,16 @@ export default function App() {
         <Stack.Screen
           name="Welcome"
           component={WelcomeScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="GroupList"
+          component={GroupListScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Group"
+          component={GroupScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

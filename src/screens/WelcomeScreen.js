@@ -36,9 +36,10 @@ const WelcomeScreen = () => {
 };
 const styles = StyleSheet.create({
   container: {
-    padding: "15%",
     justifyContent: "center",
     alignItems: "center",
+    backgroundColor: "white",
+    flex: 1,
   },
   fonts: {
     fontSize: 24,
@@ -56,6 +57,10 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     elevation: 3,
     backgroundColor: "white",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
   },
 });
 export default WelcomeScreen;

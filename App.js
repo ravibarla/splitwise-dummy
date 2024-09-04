@@ -15,7 +15,7 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="CreateGrou">
+      <Stack.Navigator initialRouteName="Welcome">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -39,6 +39,11 @@ export default function App() {
         <Stack.Screen
           name="CreateGrou"
           component={CreateGrouScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Welcome"
+          component={WelcomeScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

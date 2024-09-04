@@ -74,7 +74,7 @@ const RegistrationScreen = ({ navigation }) => {
     <View style={styles.container}>
       <View>
         <BackButton style={{ marginBottom: 20 }} />
-        <Text style={styles.welcomeText}>Log in</Text>
+        <Text style={styles.welcomeText}>Register</Text>
       </View>
       <TextInput
         style={styles.input}

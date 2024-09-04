@@ -1,12 +1,6 @@
-import {
-  Button,
-  Text,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-} from "react-native";
+import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
 import React from "react";
+import { Button } from 'react-native-elements';
 
 export default function HomeScreen({ navigation }) {
   return (
@@ -16,7 +10,7 @@ export default function HomeScreen({ navigation }) {
           borderColor: "black",
           height: "30%",
           width: "50%",
-          marginBottom: "2%",
+          marginBottom: 8,
         }}
       >
         <TouchableOpacity>
@@ -29,17 +23,22 @@ export default function HomeScreen({ navigation }) {
           />
         </TouchableOpacity>
       </View>
-      <View style={{ marginVertical: 4 }}>
+      <View style={{ marginVertical: 8 }}>
         <Button title="login" onPress={() => navigation.navigate("Login")} />
       </View>
       <View style={{ marginVertical: 4 }}>
-        <Button
+        {/* <Button
           title="register"
           color="#0fa376"
           onPress={() => navigation.navigate("Register")}
+        /> */}
+        <Button
+          title="Register"
+          buttonStyle={{ backgroundColor: "#0fa376" }}
+          onPress={() => navigation.navigate("Register")}
         />
       </View>
-      <View style={{ alignSelf: "end", marginTop: "5%", fontSize: "10" }}>
+      <View style={{ alignSelf: "center", marginTop: 20, fontSize: 10 }}>
         <Text>Terms | Privacy Policy | Contact us</Text>
       </View>
     </View>

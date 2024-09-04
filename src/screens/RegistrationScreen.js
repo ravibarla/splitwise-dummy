@@ -5,23 +5,50 @@ import {
   StyleSheet,
   TextInput,
   Button,
-  // Alert
+  Alert,
+  Pressable,
 } from "react-native";
-const RegistrationScreen = () => {
+import BackButton from "../components/BackButton";
+const RegistrationScreen = ({ navigation }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [mobile, setMobile] = useState("");
   const [password, setPassword] = useState("");
   const handleRegister = () => {
-    // if (username.trim().length == 0) {
-    //   alert("please enter the username");
-    // } else if (email.trim().length == 0) {
-    //   alert("please enter the email");
-    // } else if (mobile.trim().length == 0) {
-    //   alert("please enter the email");
-    // } else if (password.trim().length == 0) {
-    //   alert("please enter the password");
-    // }
+    if (username.trim().length == 0) {
+      alert("please enter the username");
+    } else if (email.trim().length == 0) {
+      alert("please enter the email");
+    } else if (mobile.trim().length == 0) {
+      alert("please enter the email");
+    } else if (password.trim().length == 0) {
+      alert("please enter the password");
+    }
+
+    // Regex pattern to validate email and pasword format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const mobileRegex = /^\d{10}$/; // Exactly 10 digits
+    const usernameRegex = /^.{10}$/; // Exactly 10 characters
+
+    // input form validation
+    if (username.length > 10) {
+      Alert.alert("Error", "username length should not be greater than 10");
+    } else if (!emailRegex.test(email)) {
+      Alert.alert("Error", "incorrect email format abc@domain.com ");
+    } else if (!mobileRegex.test(mobile)) {
+      Alert.alert(
+        "Error",
+        "Only numbers are allowed in mobile and should be of length 10"
+      );
+    } else if (!passwordRegex.test(password)) {
+      Alert.alert(
+        "Error",
+        "Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long."
+      );
+    }
+
     console.log("username :", username);
     console.log("email :", email);
     console.log("mobile :", mobile);
@@ -35,7 +62,7 @@ const RegistrationScreen = () => {
     //     password,
     //   });
     //   if (response.status == 200) {
-    //     Alert.alert("Success", "Successfully Logged In");
+    //     Alert.alert("Success", "Successfully Registered ");
     //   }
     // } catch {
     //   Alert.alert("Error", "An error occurred. Please try again later.");
@@ -45,7 +72,10 @@ const RegistrationScreen = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.welcomeText}>Welcome to Splitwise!</Text>
+      <View>
+        <BackButton style={{ marginBottom: 20 }} />
+        <Text style={styles.welcomeText}>Log in</Text>
+      </View>
       <TextInput
         style={styles.input}
         placeholder="username"
@@ -80,7 +110,12 @@ const RegistrationScreen = () => {
         onChangeText={(e) => setPassword(e)}
         secureTextEntry
       />
-      <Button title="Register" color="#841584" onPress={() => handleRegister()} />
+      <Pressable
+        style={styles.button}
+        onPress={() => navigation.navigate("Home")}
+      >
+        <Text style={styles.text}>Register</Text>
+      </Pressable>
     </View>
   );
 };
@@ -105,6 +140,22 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     paddingHorizontal: 10,
     marginBottom: 15,
+  },
+  button: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 32,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: "#0fa376",
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "white",
   },
 });
 

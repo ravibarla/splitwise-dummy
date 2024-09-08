@@ -7,8 +7,10 @@ import {
   StyleSheet,
   Image,
   KeyboardAvoidingView,
+  SafeAreaView
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import Navbar from "../components/Navbar";
 
 const CreateGroupScreen = () => {
   return (
@@ -20,7 +22,8 @@ const CreateGroupScreen = () => {
         <Text style={styles.title}>Create a group</Text>
         <TouchableOpacity>
           <Text style={styles.done}>Done</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> 
+         
       </View>
 
       <View style={styles.content}>

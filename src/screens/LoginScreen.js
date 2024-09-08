@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
   Pressable,
+  SafeAreaView,
 } from "react-native";
 import BackButton from "../components/BackButton";
 import axios from "axios";
@@ -41,45 +42,47 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <View>
-        <BackButton style={{ marginBottom: 20 }} />
-        <Text style={styles.welcomeText}>Log in</Text>
-      </View>
+      <SafeAreaView >
+        <View>
+          <BackButton style={{ marginBottom: 20 }} />
+          <Text style={styles.welcomeText}>Log in</Text>
+        </View>
 
-      <TextInput
-        style={styles.input}
-        placeholder="username"
-        keyboardType="default"
-        autoCapitalize="none"
-        value={userName}
-        onChangeText={(e) => setUserName(e)}
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="username"
+          keyboardType="default"
+          autoCapitalize="none"
+          value={userName}
+          onChangeText={(e) => setUserName(e)}
+        />
 
-      <TextInput
-        style={styles.input}
-        placeholder="password"
-        autoCapitalize="none"
-        value={password}
-        onChangeText={(e) => setPassword(e)}
-        secureTextEntry
-      />
+        <TextInput
+          style={styles.input}
+          placeholder="password"
+          autoCapitalize="none"
+          value={password}
+          onChangeText={(e) => setPassword(e)}
+          secureTextEntry
+        />
 
-      <Pressable style={styles.button} onPress={() => handleLogin()}>
-        <Text style={styles.text}>Login</Text>
-      </Pressable>
-      <TouchableOpacity
-        onPress={() => navigation.navigate("Home")}
-        style={{ marginTop: "5%" }}
-      >
-        <Text>forgot password ?</Text>
-      </TouchableOpacity>
+        <Pressable style={styles.button} onPress={() => handleLogin()}>
+          <Text style={styles.text}>Login</Text>
+        </Pressable>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("Home")}
+          style={{ marginTop: "5%" }}
+        >
+          <Text>forgot password ?</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: "10%",
+    // marginTop: "10%",
     padding: "5%",
   },
   welcomeText: {

@@ -7,10 +7,11 @@ import {
   Image,
   StyleSheet,
   Pressable,
+  SafeAreaView,
 } from "react-native";
 const WelcomeScreen = () => {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text style={styles.fonts}>Welcome To Splitwise</Text>
       <Text style={styles.usernameFont}>Username !</Text>
       <Text
@@ -31,7 +32,7 @@ const WelcomeScreen = () => {
           next
         </Text>
       </Pressable>
-    </View>
+    </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({

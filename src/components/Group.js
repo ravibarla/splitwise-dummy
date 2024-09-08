@@ -1,6 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet, Pressable } from "react-native";
 import UserIcon from "./UserIcon";
+import GroupIcon from "./GroupIcon";
 
 const Group = ({ groupImg, groupName, navigation }) => {
   return (
@@ -9,7 +10,7 @@ const Group = ({ groupImg, groupName, navigation }) => {
       onPress={() => alert(`${groupName} is pressed`)}
     >
       <View style={styles.icon}>
-        <UserIcon />
+        <GroupIcon style={{ borderWidth: 1 }} />
       </View>
       <View style={styles.groupName}>
         <Text>{groupName}</Text>
@@ -28,19 +29,20 @@ const styles = StyleSheet.create({
   },
   icon: {
     flex: 1,
-    backgroundColor: "yellow",
+    // backgroundColor: "yellow",
     justifyContent: "center",
     alignItems: "center",
   },
   groupName: {
     flex: 3,
-    backgroundColor: "pink",
+    // backgroundColor: "pink",
+    justifyContent:"center",
     paddingHorizontal: 20,
     paddingVertical: 10,
   },
   owes: {
     flex: 1,
-    backgroundColor: "brown",
+    // backgroundColor: "brown",
     justifyContent: "center",
     alignItems: "center",
   },

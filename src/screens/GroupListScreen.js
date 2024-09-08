@@ -5,9 +5,10 @@ import {
   ScrollView,
   TouchableOpacity,
   Pressable,
+  SafeAreaView,
 } from "react-native";
-import SearchIcon from "../components/SearchIcon";
 import Group from "../components/Group";
+import Search from "../components/Search";
 
 const GroupListScreen = () => {
   const arr = [
@@ -22,30 +23,28 @@ const GroupListScreen = () => {
   ];
   return (
     <View style={styles.container}>
-      <View style={styles.navbar}>
-        <View style={styles.left}>
-          <SearchIcon />
+      <SafeAreaView>
+        <Search
+          createButton={{ title: "create-group" }}
+          backgroundColor={"white"}
+        />
+        <View>
+          <Text>overall</Text>
         </View>
-        <View style={styles.right}>
-          <Text>Create group</Text>
-        </View>
-      </View>
-      <View>
-        <Text>overall</Text>
-      </View>
 
-      <ScrollView>
-        {arr.map((ele) => (
-          <Group groupName={ele} />
-        ))}
-      </ScrollView>
+        <ScrollView>
+          {arr.map((ele) => (
+            <Group groupName={ele} />
+          ))}
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:"10%",
+    // marginTop: "10%",
     paddingTop: "10%",
     paddingHorizontal: "5%",
     flex: 1,

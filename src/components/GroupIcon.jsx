@@ -3,13 +3,12 @@ import { TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
-const CoupleIcon = ({ color = "#464d48", size = 30, style }) => {
+const GroupIcon = ({ color = "#464d48", size = 30, style }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
       style={[styles.container, style]}
-      onPress={() => navigation.goBack()}
     >
       <Icon name="list" size={size} color={color} />
     </TouchableOpacity>
@@ -22,4 +21,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CoupleIcon;
+export default GroupIcon;

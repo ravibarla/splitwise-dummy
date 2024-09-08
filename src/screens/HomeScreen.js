@@ -1,10 +1,19 @@
-import { Text, View, StyleSheet, TouchableOpacity, Image } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Image,
+  SafeAreaView,
+} from "react-native";
 import React from "react";
-import { Button } from 'react-native-elements';
+import { Button } from "react-native-elements";
+// import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen({ navigation }) {
   return (
-    <View style={styles.container}>
+    // <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <View
         style={{
           borderColor: "black",
@@ -41,7 +50,9 @@ export default function HomeScreen({ navigation }) {
       <View style={{ alignSelf: "center", marginTop: 20, fontSize: 10 }}>
         <Text>Terms | Privacy Policy | Contact us</Text>
       </View>
-    </View>
+    </SafeAreaView>
+
+    // </View>
   );
 }
 

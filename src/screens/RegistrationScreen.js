@@ -7,6 +7,7 @@ import {
   Button,
   Alert,
   Pressable,
+  SafeAreaView,
 } from "react-native";
 import BackButton from "../components/BackButton";
 import axios from "axios";
@@ -76,8 +77,9 @@ const RegistrationScreen = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
+      <SafeAreaView>
       <View>
-        <BackButton style={{ marginBottom: 20 }} />
+        <BackButton  />
         <Text style={styles.welcomeText}>Register</Text>
       </View>
       <TextInput
@@ -116,6 +118,7 @@ const RegistrationScreen = ({ navigation }) => {
       <Pressable style={styles.button} onPress={() => handleRegister()}>
         <Text style={styles.text}>Register</Text>
       </Pressable>
+      </SafeAreaView>
     </View>
   );
 };

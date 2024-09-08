@@ -65,7 +65,7 @@ export default function GroupScreen() {
         <Button
           size="lg"
           title="Add memebers"
-          buttonStyle={{ borderRadius: "0%" }}
+          buttonStyle={{ borderRadius: 0 }}
         />
         <Text>or</Text>
         <Button size="lg" title="Share Link" />

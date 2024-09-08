@@ -9,65 +9,69 @@ import {
   Pressable,
 } from "react-native";
 import BackButton from "../components/BackButton";
+import axios from "axios";
 const RegistrationScreen = ({ navigation }) => {
-  const [username, setUsername] = useState("");
+  const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [mobile, setMobile] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
-  const handleRegister = () => {
-    if (username.trim().length == 0) {
+
+  const handleRegister = async () => {
+    if (userName.trim().length == 0) {
       alert("please enter the username");
     } else if (email.trim().length == 0) {
       alert("please enter the email");
-    } else if (mobile.trim().length == 0) {
+    } else if (name.trim().length == 0) {
       alert("please enter the email");
     } else if (password.trim().length == 0) {
       alert("please enter the password");
     }
 
     // Regex pattern to validate email and pasword format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    const mobileRegex = /^\d{10}$/; // Exactly 10 digits
-    const usernameRegex = /^.{10}$/; // Exactly 10 characters
+    // const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // const passwordRegex =
+    //   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    // const mobileRegex = /^\d{10}$/; // Exactly 10 digits
+    // const usernameRegex = /^.{10}$/; // Exactly 10 characters
 
     // input form validation
-    if (username.length > 10) {
-      Alert.alert("Error", "username length should not be greater than 10");
-    } else if (!emailRegex.test(email)) {
-      Alert.alert("Error", "incorrect email format abc@domain.com ");
-    } else if (!mobileRegex.test(mobile)) {
-      Alert.alert(
-        "Error",
-        "Only numbers are allowed in mobile and should be of length 10"
-      );
-    } else if (!passwordRegex.test(password)) {
-      Alert.alert(
-        "Error",
-        "Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long."
-      );
-    }
-
-    console.log("username :", username);
-    console.log("email :", email);
-    console.log("mobile :", mobile);
-    console.log("password :", password);
-
-    // try {
-    //   const response = await axios.post("http://localhost:500", {
-    //     username,
-    //     email,
-    //     mobile,
-    //     password,
-    //   });
-    //   if (response.status == 200) {
-    //     Alert.alert("Success", "Successfully Registered ");
-    //   }
-    // } catch {
-    //   Alert.alert("Error", "An error occurred. Please try again later.");
-    //   console.error(error);
+    // if (userName.length < 3) {
+    //   Alert.alert("Error", "username length should not be greater than 10");
+    // } else if (!emailRegex.test(email)) {
+    //   Alert.alert("Error", "incorrect email format abc@domain.com ");
     // }
+    // else if (!mobileRegex.test(mobile)) {
+    //   Alert.alert(
+    //     "Error",
+    //     "Only numbers are allowed in mobile and should be of length 10"
+    //   );
+    // }
+    // else if (!passwordRegex.test(password)) {
+    //   Alert.alert(
+    //     "Error",
+    //     "Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long."
+    //   );
+    // }
+
+    console.log("register clicked");
+    let API_REG_URL =
+      "https://airy-magic-production.up.railway.app/user/register";
+    try {
+      const response = await axios.post(API_REG_URL, {
+        userName,
+        email,
+        name,
+        password,
+      });
+
+      if (response.status == 200) {
+        console.log("response:", response);
+        Alert.alert("Success", "Successfully Registered ");
+      }
+    } catch (err) {
+      Alert.alert("Error", "An error occurred. Please try again later.");
+      console.error(err);
+    }
   };
 
   return (
@@ -78,10 +82,18 @@ const RegistrationScreen = ({ navigation }) => {
       </View>
       <TextInput
         style={styles.input}
+        placeholder="name"
+        keyboardType="default"
+        autoCapitalize="none"
+        value={name}
+        onChangeText={(e) => setName(e)}
+      />
+      <TextInput
+        style={styles.input}
         placeholder="username"
         keyboardType="default"
         autoCapitalize="none"
-        value={username}
+        value={userName}
         onChangeText={(e) => setUsername(e)}
       />
       <TextInput
@@ -95,25 +107,13 @@ const RegistrationScreen = ({ navigation }) => {
 
       <TextInput
         style={styles.input}
-        placeholder="mobile"
-        keyboardType="phone-pad"
-        autoCapitalize="none"
-        value={mobile}
-        onChangeText={(e) => setMobile(e)}
-      />
-
-      <TextInput
-        style={styles.input}
         placeholder="password"
         autoCapitalize="none"
         value={password}
         onChangeText={(e) => setPassword(e)}
         secureTextEntry
       />
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate("Home")}
-      >
+      <Pressable style={styles.button} onPress={() => handleRegister()}>
         <Text style={styles.text}>Register</Text>
       </Pressable>
     </View>

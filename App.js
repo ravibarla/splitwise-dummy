@@ -11,12 +11,13 @@ import CreateGrouScreen from "./src/screens/CreateGrouScreen";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import GroupScreen from "./src/screens/GroupScreen";
+import UsersList from "./src/screens/UsersList";
 
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Home">
+      <Stack.Navigator initialRouteName="CreateGrou">
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -55,6 +56,11 @@ export default function App() {
         <Stack.Screen
           name="Group"
           component={GroupScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="UsersList"
+          component={UsersList}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

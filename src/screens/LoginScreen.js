@@ -10,46 +10,33 @@ import {
   Pressable,
 } from "react-native";
 import BackButton from "../components/BackButton";
+import axios from "axios";
 
 const LoginScreen = ({ navigation }) => {
-  const [email, setEmail] = useState("");
+  const [userName, setUserName] = useState("");
 
   const [password, setPassword] = useState("");
-  const handleLogin = () => {
-    if (email.trim().length == 0) {
+  const handleLogin = async () => {
+    if (userName.trim().length == 0) {
       Alert.alert("Error", "please enter the email");
     } else if (password.trim().length == 0) {
       Alert.alert("Error", "please enter the password");
     }
-    // Regex pattern to validate email and pasword format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex =
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
-    if (!emailRegex.test(email)) {
-      Alert.alert("Error", "incorrect email format abc@domain.com ");
-    } else if (!passwordRegex.test(password)) {
-      Alert.alert(
-        "Error",
-        "Password must contain at least one uppercase letter, one lowercase letter, one number, one special character, and be at least 8 characters long."
-      );
+    let API_LOGIN_URL =
+      "https://airy-magic-production.up.railway.app/user/login";
+    try {
+      const response = await axios.get(API_LOGIN_URL, {
+        userName,
+        password,
+      });
+      if (response.status === 200) {
+        Alert.alert("Success", "Successfully Logged In");
+      }
+    } catch (error) {
+      Alert.alert("Error", "An error occurred. Please try again later.");
+      console.error(error);
     }
-
-    console.log("email :", email);
-    console.log("password :", password);
-
-    // try {
-    //   const response = await axios.post("http://localhost:500", {
-    //     email,
-    //     password,
-    //   });
-    //   if (response.status === 200) {
-    //     Alert.alert("Success", "Successfully Logged In");
-    //   }
-    // } catch {
-    //   Alert.alert("Error", "An error occurred. Please try again later.");
-    //   console.error(error);
-    // }
   };
 
   return (
@@ -61,11 +48,11 @@ const LoginScreen = ({ navigation }) => {
 
       <TextInput
         style={styles.input}
-        placeholder="email"
-        keyboardType="email-address"
+        placeholder="username"
+        keyboardType="default"
         autoCapitalize="none"
-        value={email}
-        onChangeText={(e) => setEmail(e)}
+        value={userName}
+        onChangeText={(e) => setUserName(e)}
       />
 
       <TextInput
@@ -77,10 +64,7 @@ const LoginScreen = ({ navigation }) => {
         secureTextEntry
       />
 
-      <Pressable
-        style={styles.button}
-        onPress={() => navigation.navigate("Home")}
-      >
+      <Pressable style={styles.button} onPress={() => handleLogin()}>
         <Text style={styles.text}>Login</Text>
       </Pressable>
       <TouchableOpacity

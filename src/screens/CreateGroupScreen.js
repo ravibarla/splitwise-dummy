@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-const createGroupScreen = () => {
+const CreateGroupScreen = () => {
   return (
     <View style={styles.container} behavior="padding">
       <View style={styles.header}>
@@ -119,4 +119,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default createGroupScreen;
+export default CreateGroupScreen;

@@ -3,26 +3,23 @@ import { TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
-const UserIcon = ({ color = "#464d48", size = 30, style }) => {
+const CoupleIcon = ({ color = "#464d48", size = 30, style }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity
-      style={[styles.container]}
+      style={[styles.container, style]}
       onPress={() => navigation.goBack()}
     >
-      <Icon name="person-outline" size={size} color={color} />
+      <Icon name="list" size={size} color={color} />
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 15,
-    borderRadius: 50,
-    borderWidth: 2,
-    borderColor: "grey",
+    padding: 10,
   },
 });
 
-export default UserIcon;
+export default CoupleIcon;

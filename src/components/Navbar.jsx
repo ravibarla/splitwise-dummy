@@ -1,28 +1,44 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
+import BackButton from "./BackButton";
+import SettingIcon from "./settingIcon";
 
-const Navbar = ({ title }) => {
+const Navbar = ({
+  title,
+  showCancel,
+  showBack,
+  showSetting,
+  showNext,
+  style,
+}) => {
   return (
-    <View style={styles.navbar}>
+    <View style={[styles.navbar, style]}>
       <View>
-        <Text style={{ color: "green" }}>cancel</Text>
+        {showCancel && <Text style={{ color: "green" }}>cancel</Text>}
+        {showBack && (
+          <Text style={{ color: "green" }}>
+            <BackButton />
+          </Text>
+        )}
       </View>
       <View>
         <Text>{title}</Text>
       </View>
       <View>
-        <Text>next</Text>
+        {showNext && <Text>next</Text>}
+        {showSetting && <SettingIcon size={30} />}
       </View>
     </View>
   );
 };
 const styles = StyleSheet.create({
   navbar: {
-    height: 50,
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "flex-end",
-    padding: "2%",
+    alignItems: "center",
+    // padding: "2%",
+    height: 50,
+    paddingHorizontal: 15,
   },
 });
 export default Navbar;

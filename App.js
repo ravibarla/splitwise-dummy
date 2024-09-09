@@ -17,7 +17,20 @@ export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Group">
+      <Stack.Navigator
+        initialRouteName="Group"
+        screenOptions={{
+          transitionSpec: {
+            open: { animation: "timing", config: { duration: 300 } },
+            close: { animation: "timing", config: { duration: 300 } },
+          },
+          cardStyleInterpolator: ({ current }) => ({
+            cardStyle: {
+              opacity: current.progress,
+            },
+          }),
+        }}
+      >
         <Stack.Screen
           name="Home"
           component={HomeScreen}
@@ -59,7 +72,7 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="UsersList"
+          name="UserList"
           component={UsersList}
           options={{ headerShown: false }}
         />

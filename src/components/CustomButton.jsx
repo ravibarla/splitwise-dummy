@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 
-const CustomButton = ({ title }) => {
+const CustomButton = ({ title, height }) => {
   return (
-    <View style={styles.optionButton}>
+    <View style={[styles.optionButton]}>
       <Text>{title}</Text>
     </View>
   );

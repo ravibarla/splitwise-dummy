@@ -39,7 +39,14 @@ export default function GroupScreen() {
           <View style={styles.background}></View>
 
           <GroupProfile />
-          <View style={{ flex: 1, borderColor: "black", borderWidth: 2 }}>
+          <View
+            style={{
+              flex: 1,
+              borderColor: "black",
+              borderWidth: 2,
+              flexDirection: "column",
+            }}
+          >
             <ScrollView
               horizontal={true}
               style={{ flex: 1, paddingVertical: 10 }}
@@ -48,7 +55,7 @@ export default function GroupScreen() {
               <View
                 style={{
                   flexDirection: "row",
-                  alignItems: "flex-end",
+                  alignItems: "flex-start",
                 }}
               >
                 {options.map((option, index) => (
@@ -57,6 +64,19 @@ export default function GroupScreen() {
               </View>
             </ScrollView>
           </View>
+          {/* View that takes up the entire remaining space */}
+          <View style={styles.fullSpaceView}>
+            <Text style={styles.spaceBetween}>
+              you're the only one add membners!
+            </Text>
+
+            <Button style={styles.spaceBetween} title={"add member"}  radius={"lg"}/>
+            <Text style={styles.spaceBetween}>or</Text>
+            <Button style={styles.spaceBetween} title={"add member"} />
+          </View>
+          <View style={{ flex: 1 }}>
+            <Text>footer</Text>
+          </View>
         </SafeAreaView>
       </View>
     </SafeAreaProvider>
@@ -64,13 +84,23 @@ export default function GroupScreen() {
 }
 const styles = StyleSheet.create({
   container: {
-    height: "40%",
+    flex: 1,
   },
   background: {
-    height: "25%",
+    height: "10%",
     backgroundColor: "cyan",
   },
   navbar: {
     backgroundColor: "cyan",
+  },
+  fullSpaceView: {
+    flex: 7,
+    justifyContent: "center",
+    alignItems: "center",
+    borderColor: "violet",
+    borderWidth: 2,
+  },
+  spaceBetween: {
+    paddingVertical: 15,
   },
 });

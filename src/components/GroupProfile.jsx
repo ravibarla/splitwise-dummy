@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     padding: "5%",
     flex: 1,
+    position: "absolute",
+    top: "32%",
+    left: "7%",
   },
   icon: {
     borderWidth: 2,

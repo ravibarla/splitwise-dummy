@@ -15,8 +15,21 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import Navbar from "../components/Navbar";
 import GroupProfileOptionButton from "../components/GroupProfileOptionButton";
 import CustomButton from "../components/CustomButton";
+import Expense from "../components/Expense";
+import Footer from "../components/Footer";
 
 export default function GroupScreen() {
+  let expenses = [
+    { title: "expense1", amount: 100 },
+    { title: "expense2", amount: 100 },
+    { title: "expense3", amount: 100 },
+    { title: "expense4", amount: 100 },
+
+    { title: "expense5", amount: 100 },
+    { title: "expense6", amount: 100 },
+    { title: "expense7", amount: 100 },
+    { title: "expense8", amount: 100 },
+  ];
   let options = [
     { title: "option 1" },
     { title: "option 2" },
@@ -42,8 +55,6 @@ export default function GroupScreen() {
           <View
             style={{
               flex: 1,
-              borderColor: "black",
-              borderWidth: 2,
               flexDirection: "column",
             }}
           >
@@ -65,18 +76,51 @@ export default function GroupScreen() {
             </ScrollView>
           </View>
           {/* View that takes up the entire remaining space */}
-          <View style={styles.fullSpaceView}>
-            <Text style={styles.spaceBetween}>
-              you're the only one add membners!
-            </Text>
-
-            <Button style={styles.spaceBetween} title={"add member"}  radius={"lg"}/>
-            <Text style={styles.spaceBetween}>or</Text>
-            <Button style={styles.spaceBetween} title={"add member"} />
-          </View>
-          <View style={{ flex: 1 }}>
-            <Text>footer</Text>
-          </View>
+          {
+            /*
+            <View style={styles.fullSpaceView}>
+              <Text style={styles.spaceBetween}>
+                you're the only one add membners!
+              </Text>
+              <Button
+                style={styles.spaceBetween}
+                title={"add member"}
+                radius={"lg"}
+              />
+              <Text style={styles.spaceBetween}>or</Text>
+              <Button style={styles.spaceBetween} title={"add member"} />
+            </View>
+         */
+            <View
+              style={{
+                flex: 7,
+                flexDirection: "column",
+              }}
+            >
+              <ScrollView
+                horizontal={false}
+                style={{ flex: 1, paddingVertical: 10, width: "100%" }}
+                showsVerticalScrollIndicator={false}
+              >
+                {expenses.map((ele, index) => (
+                  <View
+                    style={{
+                      height: 100,
+                      paddingHorizontal: "5%",
+                    }}
+                  >
+                    <Expense
+                      title={ele.title}
+                      amount={ele.amount}
+                      key={index}
+                    />
+                   
+                  </View>
+                ))}
+              </ScrollView>
+            </View>
+          }
+          <Footer />
         </SafeAreaView>
       </View>
     </SafeAreaProvider>

@@ -24,8 +24,6 @@ const styles = StyleSheet.create({
   groupView: {
     justifyContent: "flex-start",
     alignItems: "flex-start",
-    borderColor: "red",
-    borderWidth: 2,
     padding: "5%",
     flex: 1,
     position: "relative",

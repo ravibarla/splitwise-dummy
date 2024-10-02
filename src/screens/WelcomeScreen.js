@@ -11,22 +11,15 @@ import {
 } from "react-native";
 import AuthContext from "../context/AuthContext";
 const WelcomeScreen = ({ navigation }) => {
-  // const [user, setUser] = useState(null);
-  // useEffect(() => {
-  //   const { user } = useContext(AuthContext);
-  //   // if (u) {
-  //   //   setUser(u);
-  //   // }
-  //   console.log(" user in welcome screen :", user);
-  // }, []);
   const { user } = useContext(AuthContext);
-  console.log("user in welcome screen :", user);
-  console.log("welcome screen");
+  const [loader, setLoader] = useState(true);
 
+  console.log("welcome screen");
+  console.log("user in welcome screen :", user);
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.fonts}>Welcome To Splitwise</Text>
-      {/* <Text style={styles.usernameFont}>{user.userName}</Text> */}
+      <Text style={styles.usernameFont}>{user.userName}</Text>
       <Text
         style={{
           marginTop: "20%",

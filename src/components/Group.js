@@ -20,7 +20,11 @@ const Group = ({
     >
       <View style={styles.icon}>
         <GroupIcon
-          style={{ borderWidth: 1, borderRadius: 15,backgroundColor:"#0b5345" }}
+          style={{
+            borderWidth: 1,
+            borderRadius: 15,
+            backgroundColor: "#0b5345",
+          }}
           color={"white"}
         />
       </View>

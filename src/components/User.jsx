@@ -2,7 +2,7 @@ import { View, Text, StyleSheet } from "react-native";
 import React from "react";
 import UserIcon from "./UserIcon";
 import { CheckBox } from "react-native-elements";
-
+import { LinearGradient } from "expo-linear-gradient";
 export default function User({ user, showRadio, onSelect }) {
   const [selectedIndex, setIndex] = React.useState(0);
   // Function to handle checkbox press, allowing uncheck option

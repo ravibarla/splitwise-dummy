@@ -61,6 +61,7 @@ export default function CreateGroupScreen({ navigation }) {
           showCancel={true}
           showNext={true}
           onNextPress={handleGroupInput}
+          navigation={navigation}
         />
         {/* </View> */}
         <View style={styles.createView}>

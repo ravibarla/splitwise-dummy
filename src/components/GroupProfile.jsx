@@ -2,13 +2,13 @@ import { View, Text, StyleSheet, TouchableOpacity, Button } from "react-native";
 import GroupIcon from "./GroupIcon";
 import React from "react";
 
-const GroupProfile = ({ groupName, groupId }) => {
+const GroupProfile = ({ groupName, groupId, iconColor, iconBg }) => {
   console.log("group name :", groupName);
   console.log("group id :", groupId);
   return (
     <View style={styles.groupView}>
       <View style={styles.icon}>
-        <GroupIcon />
+        <GroupIcon color={iconColor} />
       </View>
       <View>
         <Text style={styles.groupTitle}>{groupName}</Text>
@@ -35,6 +35,8 @@ const styles = StyleSheet.create({
   icon: {
     borderWidth: 2,
     borderRadius: 10,
+    borderColor: "white",
+    backgroundColor: "#16325B",
   },
   groupTitle: { fontSize: 20, fontWeight: "bold", paddingVertical: 5 },
   expense: {},

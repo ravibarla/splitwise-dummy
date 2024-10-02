@@ -9,6 +9,8 @@ import {
   Image,
   // SafeAreaView,
 } from "react-native";
+// import LinearGradient from "react-native-linear-gradient";
+import { LinearGradient } from "expo-linear-gradient";
 import { Button } from "react-native-elements";
 import React from "react";
 import BackButton from "../components/BackButton";
@@ -54,20 +56,31 @@ export default function GroupScreen({ navigation, route }) {
     <SafeAreaProvider>
       <View style={styles.container}>
         <SafeAreaView style={{ flex: 1 }}>
-          <Navbar showBack={true} showSetting={true} style={styles.navbar} />
+          <LinearGradient
+            colors={["#005c97", "#363795"]}
+            // colors={["#1fa2ff","#12d8fa", "#a6ffcb"]} // Define your gradient colors
+            start={{ x: 0, y: 0 }} // Optional: start of the gradient (top-left corner)
+            end={{ x: 1, y: 0 }}
+            style={{ flex: 1 }}
+          >
+            <Navbar showBack={true} showSetting={true} iconColor={"white"} />
+          </LinearGradient>
+          <View style={styles.background}>
+            <LinearGradient
+              colors={["#005c97", "#363795"]}
+              // colors={["#1fa2ff","#12d8fa", "#a6ffcb"]} // Define your gradient colors
+              start={{ x: 0, y: 0 }} // Optional: start of the gradient (top-left corner)
+              end={{ x: 1, y: 0 }}
+              style={{ flex: 1 }}
+            ></LinearGradient>
+          </View>
 
-          <View style={styles.background}></View>
-          {/* <ImageBackground
-            source={img} // Replace with your image URL or local image
-            style={styles.background}
-            resizeMode="cover"
-          ></ImageBackground> */}
-
-          {/* <Image
-            source={require("../../assets/background.png")}
-            style={styles.background}
-          /> */}
-          <GroupProfile groupName={groupName} groupId={groupId} />
+          <GroupProfile
+            groupName={groupName}
+            groupId={groupId}
+            iconColor={"white"}
+            iconBg={"#176B87"}
+          />
           <View
             style={{
               flex: 1,
@@ -148,11 +161,9 @@ const styles = StyleSheet.create({
   },
   background: {
     height: "10%",
-    backgroundColor: "cyan",
+    // backgroundColor: "cyan",
   },
-  navbar: {
-    backgroundColor: "cyan",
-  },
+  navbar: {},
   fullSpaceView: {
     flex: 7,
     justifyContent: "center",

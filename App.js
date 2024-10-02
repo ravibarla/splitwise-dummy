@@ -24,7 +24,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Home"
+        initialRouteName="UserList"
         screenOptions={{
           transitionSpec: {
             open: { animation: "timing", config: { duration: 300 } },
@@ -102,6 +102,11 @@ function App() {
         <Stack.Screen
           name="GroupSettings"
           component={GroupSettingsScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Loading"
+          component={LoaderScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

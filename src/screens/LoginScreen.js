@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import {
   Text,
   View,
@@ -19,10 +19,12 @@ const LoginScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
 
   const [password, setPassword] = useState("");
-  const { login, logout, user } = useContext(AuthContext);
-  if (user) {
-    navigation.navigate("Welcome");
-  }
+  const { login, user } = useContext(AuthContext);
+  useEffect(() => {
+    if (user) {
+      navigation.navigate("Welcome");
+    }
+  }, [user]);
   const handleLogin = async () => {
     if (userName.trim().length == 0) {
       Alert.alert("Error", "please enter the email");
@@ -37,11 +39,11 @@ const LoginScreen = ({ navigation }) => {
         userName,
         password,
       });
+      console.log("user enterred :", userName, password);
       // if (response.data == "Successfully Logged In!!!") {
-      login({ userName, password });
-      console.log("user after login:", userName, password);
+      await login({ userName, password });
       Alert.alert("Success", "Successfully Logged In");
-      navigation.navigate("Welcome");
+
       // }
     } catch (error) {
       Alert.alert("Error", "An error occurred. Please try again later.");

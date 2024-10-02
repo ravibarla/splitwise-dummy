@@ -3,12 +3,12 @@ import { TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
-const SettingIcon = ({ color = "#464d48", size = 20, style }) => {
+const SettingIcon = ({ color = "#464d48", size = 20, style, iconColor }) => {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity style={[styles.container, style]}>
-      <Icon name="settings-outline" size={size} color={color} />
+      <Icon name="settings-outline" size={size} color={iconColor || color} />
     </TouchableOpacity>
   );
 };

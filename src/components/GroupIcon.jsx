@@ -3,7 +3,7 @@ import { TouchableOpacity, StyleSheet } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 
-const GroupIcon = ({ color, size, style }) => {
+const GroupIcon = ({ color, size, style,iconColor }) => {
   const navigation = useNavigation();
 
   return (

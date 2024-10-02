@@ -16,15 +16,21 @@ const Navbar = ({
   showCross,
   onNextPress,
   addMembers,
+  navigation,
+  iconColor,
 }) => {
   return (
     <View style={[styles.navbar, style]}>
       <View>
-        {showCancel && <Text style={{ color: "green" }}>cancel</Text>}
+        {showCancel && (
+          <Text style={{ color: "green" }} onPress={() => navigation.goBack()}>
+            cancel
+          </Text>
+        )}
         {showCross && <CrossIcon style={{ size: 20 }} />}
         {showBack && (
-          <Text style={{ color: "green" }}>
-            <BackButton />
+          <Text style={{ color: "green" }} onPress={() => navigation.goBack()}>
+            <BackButton iconColor={iconColor} />
           </Text>
         )}
       </View>
@@ -38,7 +44,7 @@ const Navbar = ({
           </Text>
         )}
         {showSave && <Text style={{ color: "green" }}>save</Text>}
-        {showSetting && <SettingIcon size={30} />}
+        {showSetting && <SettingIcon size={30} iconColor={iconColor} />}
       </View>
     </View>
   );

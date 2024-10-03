@@ -6,7 +6,9 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   console.log("authProvider :");
+
   const [user, setUser] = useState(null);
+
   //check if user already exist
   useEffect(() => {
     const loadUser = async () => {

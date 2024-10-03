@@ -11,21 +11,28 @@ import Group from "../components/Group";
 import Search from "../components/Search";
 import FilterIcon from "../components/FilterIcon";
 import Footer from "../components/Footer";
-import { useEffect, useState } from "react";
+import AuthContext from "../context/AuthContext";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 const GroupListScreen = ({ navigation }) => {
   const [groupList, setGroupList] = useState([]);
+  const { user } = useContext(AuthContext);
   console.log("group list screen");
+  console.log("user :", user);
   useEffect(() => {
     const getGroupList = async () => {
       try {
-        const response = await axios.get(
-          `https://airy-magic-production.up.railway.app/users/?userId=2`
-        );
+        const { API_URL } = process.env;
+        let url = `${API_URL}/users/?userId=${user.id}`;
+        const response = await axios.get(url, {
+          headers: {
+            Authorization: `Bearer ${user.jwt}`,
+            "Content-Type": "application/json",
+          },
+        });
 
         if (response.data) {
-          setGroupList(response.data);
-          console.log("response :", response.data);
+          setGroupList(response.data.responseData);
         }
       } catch (error) {
         console.log("error :", error);

@@ -9,14 +9,16 @@ import {
   Alert,
 } from "react-native";
 // import { SafeAreaView } from "react-native-elements";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import User from "../components/User";
 import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import axios from "axios";
-export default function UsersList() {
+import AuthContext from "../context/AuthContext";
+export default function UsersList({ navigation }) {
   const [userList, setUserList] = useState([]);
   const [selectedUserList, setSelectedUserList] = useState([]);
+  const { user } = useContext(AuthContext);
   let obj = [
     "John",
     "Jane",
@@ -43,14 +45,22 @@ export default function UsersList() {
   useEffect(() => {
     getUserList = async () => {
       try {
+        const { API_URL } = process.env;
+        let url = `${API_URL}/user/getUserList`;
+        console.log("user :", user);
         const response = await axios.get(
-          "https://airy-magic-production.up.railway.app/user/getUserList"
+          // "https://airy-magic-production.up.railway.app/user/getUserList"
+          url,
+          {
+            headers: {
+              Authorization: `Bearer ${user.jwt}`,
+              "Content-Type": "application/json",
+            },
+          }
         );
 
-        if (response.data) {
-          // console.log("response :", response.data);
-          setUserList(response.data);
-          // console.log("userList :", userList);
+        if (response.data.responseMessage) {
+          setUserList(response.data.responseData);
         }
       } catch (error) {
         console.log("error :", error);
@@ -75,18 +85,26 @@ export default function UsersList() {
   };
   const handleAddMembers = async () => {
     try {
-      const url = process.env.API_URL;
+      const { API_URL } = process.env;
+      let url = `${API_URL}/group/addMembers`;
       const response = await axios.post(
-        "https://airy-magic-production.up.railway.app/group/addMembers",
+        // "https://airy-magic-production.up.railway.app/group/addMembers",
+        url,
         {
-          groupId: 2,
+          groupId: 9,
           membersList: selectedUserList,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.jwt}`,
+            "Content-Type": "application/json",
+          },
         }
       );
-     
-      if(response.data="Members added successfully!!!!!"){
+      console.log("res :", response.data);
+      if (response.data.responseMessage === "Success") {
         console.log("res :", response.data);
-        
+        Alert.alert("success", response.data.responseData);
       }
     } catch (error) {
       console.log("error :", error);
@@ -100,6 +118,7 @@ export default function UsersList() {
           showCancel={true}
           showNext={true}
           onNextPress={() => handleAddMembers()}
+          navigation={navigation}
         />
         <Search />
         <ScrollView>

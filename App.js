@@ -24,7 +24,7 @@ function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="UserList"
+        initialRouteName="Login"
         screenOptions={{
           transitionSpec: {
             open: { animation: "timing", config: { duration: 300 } },

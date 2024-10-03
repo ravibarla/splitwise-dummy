@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import BackButton from "../components/BackButton";
 import axios from "axios";
+// import { API_URL } from "@env";
 const RegistrationScreen = ({ navigation }) => {
   const [userName, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -55,21 +56,31 @@ const RegistrationScreen = ({ navigation }) => {
     // }
 
     console.log("register clicked");
-    let API_REG_URL =
-      "https://airy-magic-production.up.railway.app/user/register";
+    // let API_REG_URL =
+    //   "https://airy-magic-production.up.railway.app/user/register";
+    const { API_URL } = process.env;
+    let url = `${API_URL}/user/signup`;
     try {
-      const response = await axios.post(API_REG_URL, {
-        userName,
-        email,
-        name,
-        password,
-      });
+      const response = await axios.post(
+        url,
+        {
+          userName,
+          email,
+          name,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       // if (response.status == 200) {
       if (response.data.responseMessage == "Success") {
         console.log("response:", response.data.responseMessage);
         Alert.alert("Success", "Successfully Registered ");
-        navigation.navigate("Home")
+        navigation.navigate("Home");
       }
     } catch (err) {
       Alert.alert("Error", "An error occurred. Please try again later.");

@@ -15,6 +15,7 @@ const WelcomeScreen = ({ navigation }) => {
   const [loader, setLoader] = useState(true);
 
   console.log("welcome screen");
+
   console.log("user in welcome screen :", user);
   return (
     <SafeAreaView style={styles.container}>

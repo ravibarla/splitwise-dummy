@@ -13,11 +13,13 @@ import {
 import BackButton from "../components/BackButton";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
+import { API_URL } from "@env";
 
 const LoginScreen = ({ navigation }) => {
   console.log("login screen");
+  const { API_URL } = process.env;
+  // console.log("api_url :",`${API_URL}/user/login`)
   const [userName, setUserName] = useState("");
-
   const [password, setPassword] = useState("");
   const { login, user } = useContext(AuthContext);
   useEffect(() => {
@@ -32,19 +34,27 @@ const LoginScreen = ({ navigation }) => {
       Alert.alert("Error", "please enter the password");
     }
 
-    let API_LOGIN_URL =
-      "https://airy-magic-production.up.railway.app/user/login";
+    let url = `${API_URL}/user/login`;
     try {
-      const response = await axios.post(API_LOGIN_URL, {
-        userName,
-        password,
-      });
-      console.log("user enterred :", userName, password);
-      // if (response.data == "Successfully Logged In!!!") {
-      await login({ userName, password });
-      Alert.alert("Success", "Successfully Logged In");
-
-      // }
+      const response = await axios.post(
+        url,
+        {
+          userName,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.data.responseMessage == "Success") {
+        const { userName, jwt, id } = response.data.responseData;
+        await login({ userName, jwt, id });
+        Alert.alert("Success", "Successfully Logged In");
+      } else {
+        Alert.alert("Error", "Password or Username Not Exist");
+      }
     } catch (error) {
       Alert.alert("Error", "An error occurred. Please try again later.");
       console.error(error);

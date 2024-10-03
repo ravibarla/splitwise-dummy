@@ -114,7 +114,9 @@ export default function GroupScreen({ navigation, route }) {
                 style={styles.spaceBetween}
                 title={"add member"}
                 radius={"lg"}
-                onPress={() => navigation.navigate("UserList")}
+                onPress={() => navigation.navigate("UserList",{
+                  groupId
+                })}
               />
               {/* <Text style={styles.spaceBetween}>or</Text>
               <Button style={styles.spaceBetween} title={"share  member"} /> */}

@@ -14,11 +14,10 @@ import BackButton from "../components/BackButton";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import { API_URL } from "@env";
+import { API_PATH, getFullPath } from "../config/api";
 
 const LoginScreen = ({ navigation }) => {
   console.log("login screen");
-  const { API_URL } = process.env;
-  // console.log("api_url :",`${API_URL}/user/login`)
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const { login, user } = useContext(AuthContext);
@@ -34,10 +33,9 @@ const LoginScreen = ({ navigation }) => {
       Alert.alert("Error", "please enter the password");
     }
 
-    let url = `${API_URL}/user/login`;
     try {
       const response = await axios.post(
-        url,
+        getFullPath(API_PATH.login),
         {
           userName,
           password,
@@ -48,6 +46,7 @@ const LoginScreen = ({ navigation }) => {
           },
         }
       );
+      // console.log("res :",response.data)
       if (response.data.responseMessage == "Success") {
         const { userName, jwt, id } = response.data.responseData;
         await login({ userName, jwt, id });

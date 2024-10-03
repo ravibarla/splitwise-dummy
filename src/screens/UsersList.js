@@ -15,10 +15,14 @@ import Navbar from "../components/Navbar";
 import Search from "../components/Search";
 import axios from "axios";
 import AuthContext from "../context/AuthContext";
-export default function UsersList({ navigation }) {
+import { getFullPath, API_PATH } from "../config/api";
+export default function UsersList({ navigation, route }) {
   const [userList, setUserList] = useState([]);
   const [selectedUserList, setSelectedUserList] = useState([]);
+  const [existingUserList, setExistingUserList] = useState([]);
   const { user } = useContext(AuthContext);
+  // console.log("route :", route.params);
+  const { groupId } = route.params;
   let obj = [
     "John",
     "Jane",
@@ -45,23 +49,21 @@ export default function UsersList({ navigation }) {
   useEffect(() => {
     getUserList = async () => {
       try {
-        const { API_URL } = process.env;
-        let url = `${API_URL}/user/getUserList`;
         console.log("user :", user);
-        const response = await axios.get(
-          // "https://airy-magic-production.up.railway.app/user/getUserList"
-          url,
-          {
+        console.log(getFullPath(API_PATH.getUserByGroup(groupId)));
+        const response1 = await axios.get(
+          getFullPath(API_PATH.getUserByGroup(groupId)), {
             headers: {
               Authorization: `Bearer ${user.jwt}`,
               "Content-Type": "application/json",
             },
-          }
-        );
-
-        if (response.data.responseMessage) {
-          setUserList(response.data.responseData);
+          })
+        
+        console.log("res1 :", response1.data.responseMessage);
+        if(response1.data.responseMessage=="Success"){
+          
         }
+        
       } catch (error) {
         console.log("error :", error);
       }

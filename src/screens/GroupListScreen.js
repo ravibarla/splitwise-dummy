@@ -30,8 +30,7 @@ const GroupListScreen = ({ navigation }) => {
             "Content-Type": "application/json",
           },
         });
-
-        if (response.data) {
+        if (response.data.responseMessage == "Success") {
           setGroupList(response.data.responseData);
         }
       } catch (error) {

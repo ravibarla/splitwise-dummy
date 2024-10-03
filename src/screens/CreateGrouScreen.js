@@ -25,14 +25,15 @@ export default function CreateGroupScreen({ navigation }) {
     }
     console.log("groupName :", groupName);
     try {
-      const response = await axios.post(
+      const response1 = await axios.post(
         "https://airy-magic-production.up.railway.app/group/create",
         {
           groupName,
         }
       );
-      console.log("res :", response.data);
-      if (response.status === 200) {
+      console.log("res group creation:", response1.data);
+      if (response1.data.responseMessage === "Success") {
+        const response2=await axios.post("https://airy-magic-production.up.railway.app/group/create"  )
         navigation.navigate("GroupList");
         Alert.alert("Success", "Successfully Logged In");
       }

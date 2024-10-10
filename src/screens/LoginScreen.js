@@ -13,7 +13,6 @@ import {
 import BackButton from "../components/BackButton";
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
-import { API_URL } from "@env";
 import { API_PATH, getFullPath } from "../config/api";
 
 const LoginScreen = ({ navigation }) => {
@@ -34,6 +33,7 @@ const LoginScreen = ({ navigation }) => {
     }
 
     try {
+      console.log("url :-",getFullPath(API_PATH.login))
       const response = await axios.post(
         getFullPath(API_PATH.login),
         {
@@ -46,7 +46,7 @@ const LoginScreen = ({ navigation }) => {
           },
         }
       );
-      // console.log("res :",response.data)
+      console.log("res :",response)
       if (response.data.responseMessage == "Success") {
         const { userName, jwt, id } = response.data.responseData;
         await login({ userName, jwt, id });

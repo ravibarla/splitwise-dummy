@@ -6,8 +6,8 @@ export const API_PATH = {
   createGroup: "/group/create",
   addMember: "/group/addMembers",
   getUserList: "/user/getUserList",
-  getUserByGroup: (id)=>`/user/getUserByGroup?groupId=${id}`,
-  getGroupByUser: (id)=>`/users/?userId=${id}`,
+  getUserByGroup: (id) => `/user/getUserByGroup?groupId=${id}`,
+  getGroupByUser: (id) => `/users/?userId=${id}`,
 };
 
 export const getFullPath = (path) => `${API_URL}${path}`;

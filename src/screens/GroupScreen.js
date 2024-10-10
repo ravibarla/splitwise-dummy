@@ -52,6 +52,11 @@ export default function GroupScreen({ navigation, route }) {
     { title: "option 9" },
   ];
   const img = require("../../assets/background1.jpg");
+  const handleAddMember1 = () => {
+    navigation.navigate("UserList", {
+      groupId,
+    });
+  };
   return (
     <SafeAreaProvider>
       <View style={styles.container}>
@@ -114,43 +119,18 @@ export default function GroupScreen({ navigation, route }) {
                 style={styles.spaceBetween}
                 title={"add member"}
                 radius={"lg"}
-                onPress={() => navigation.navigate("UserList",{
-                  groupId
-                })}
+                onPress={() =>
+                  // handleAddMember()
+                  navigation.navigate("UserList", {
+                    groupId,
+                  })
+                }
               />
               {/* <Text style={styles.spaceBetween}>or</Text>
               <Button style={styles.spaceBetween} title={"share  member"} /> */}
             </View>
-
-            // <View
-            //   style={{
-            //     flex: 7,
-            //     flexDirection: "column",
-            //   }}
-            // >
-            //   <ScrollView
-            //     horizontal={false}
-            //     style={{ flex: 1, paddingVertical: 10, width: "100%" }}
-            //     showsVerticalScrollIndicator={false}
-            //   >
-            //     {expenses.map((ele, index) => (
-            //       <View
-            //         style={{
-            //           height: 100,
-            //           paddingHorizontal: "5%",
-            //         }}
-            //         key={index}
-            //       >
-            //         <Expense
-            //           title={ele.title}
-            //           amount={ele.amount}
-            //           key={index}
-            //         />
-            //       </View>
-            //     ))}
-            //   </ScrollView>
-            // </View>
           }
+
           <Footer />
         </SafeAreaView>
       </View>

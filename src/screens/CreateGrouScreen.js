@@ -9,13 +9,15 @@ import {
   Alert,
   SafeAreaView,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import CameraButton from "../components/CameraButton";
 import HomeIcon from "../components/HomeIcon";
 import Navbar from "../components/Navbar";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 export default function CreateGroupScreen({ navigation }) {
+  const { user } = useContext(AuthContext);
   const [groupName, setGroupName] = useState("");
   const handleGroupInput = async () => {
     if (groupName.length == 0) {
@@ -29,13 +31,34 @@ export default function CreateGroupScreen({ navigation }) {
         "https://airy-magic-production.up.railway.app/group/create",
         {
           groupName,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${user.jwt}`,
+            "Content-Type": "application/json",
+          },
         }
       );
       console.log("res group creation:", response1.data);
       if (response1.data.responseMessage === "Success") {
-        const response2=await axios.post("https://airy-magic-production.up.railway.app/group/create"  )
-        navigation.navigate("GroupList");
-        Alert.alert("Success", "Successfully Logged In");
+        const response2 = await axios.post(
+          "https://airy-magic-production.up.railway.app/group/addMembers",
+          {
+            groupId: response1.data.responseData.id,
+            membersList: [user.id],
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${user.jwt}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (response2.data.responseMessage === "Success") {
+          console.log(response2.data);
+          navigation.navigate("GroupList");
+          Alert.alert("Success", "Successfully Added member");
+        }
       }
     } catch (error) {
       Alert.alert("Error", "An error occurred. Please try again later.");
@@ -45,18 +68,6 @@ export default function CreateGroupScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <SafeAreaView>
-        {/* <View style={styles.header}> */}
-        {/* <Pressable onPress={() => alert("back")}>
-          <Text style={{ color: "#0fa376", fontWeight: "bold", fontSize: 14 }}>
-            Cancel
-          </Text>
-        </Pressable>
-        <Text style={{ fontSize: 18, fontWeight: "bold" }}>Create A Group</Text>
-        <Pressable onPress={() => handleGroupInput()}>
-          <Text style={{ color: "#0fa376", fontWeight: "bold", fontSize: 14 }}>
-            Done
-          </Text>
-        </Pressable> */}
         <Navbar
           title={"Create A Group"}
           showCancel={true}

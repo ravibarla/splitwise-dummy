@@ -14,14 +14,17 @@ import Footer from "../components/Footer";
 import AuthContext from "../context/AuthContext";
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
+import { useIsFocused } from "@react-navigation/native"; // Import useIsFocused
 const GroupListScreen = ({ navigation }) => {
   const [groupList, setGroupList] = useState([]);
   const { user } = useContext(AuthContext);
+  const isFocused = useIsFocused(); // Hook to check if the screen is focused
   console.log("group list screen");
   console.log("user :", user);
   useEffect(() => {
     const getGroupList = async () => {
       try {
+        console.log("api get group is called");
         const { API_URL } = process.env;
         let url = `${API_URL}/users/?userId=${user.id}`;
         const response = await axios.get(url, {
@@ -37,8 +40,10 @@ const GroupListScreen = ({ navigation }) => {
         console.log("error :", error);
       }
     };
-    getGroupList();
-  }, []);
+    if (isFocused) {
+      getGroupList();
+    }
+  }, [isFocused]);
   const arr = [
     "group1",
     "group2",

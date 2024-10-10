@@ -131,7 +131,7 @@ export default function GroupScreen({ navigation, route }) {
             </View>
           }
 
-          <Footer />
+          <Footer navigation={navigation}/>
         </SafeAreaView>
       </View>
     </SafeAreaProvider>

@@ -35,9 +35,11 @@ export default function UsersList({ navigation, route }) {
         );
 
         if (response1.data.responseMessage === "Success") {
-          const existingUsers = response1.data.responseData.map(user => user.id);
+          const existingUsers = response1.data.responseData.map(
+            (user) => user.id
+          );
           setExistingUserList(new Set(existingUsers)); // Set for efficient lookup
-          setSelectedUserList(prev => new Set([...prev, ...existingUsers])); // Pre-select existing members
+          setSelectedUserList((prev) => new Set([...prev, ...existingUsers])); // Pre-select existing members
         }
       } catch (error) {
         console.log("error :", error);
@@ -64,7 +66,7 @@ export default function UsersList({ navigation, route }) {
   }, []);
 
   const handleUserSelection = (userId) => {
-    setSelectedUserList(prevSelected => {
+    setSelectedUserList((prevSelected) => {
       const updatedSelection = new Set(prevSelected);
       if (updatedSelection.has(userId)) {
         updatedSelection.delete(userId); // Uncheck if already selected
@@ -79,6 +81,7 @@ export default function UsersList({ navigation, route }) {
     try {
       const { API_URL } = process.env;
       const url = `${API_URL}/group/addMembers`;
+
       const response = await axios.post(
         url,
         {
@@ -92,6 +95,9 @@ export default function UsersList({ navigation, route }) {
           },
         }
       );
+      // console.log(Array.from(selectedUserList))
+      // console.log(response.config)
+      console.log(response.data)
       if (response.data.responseMessage === "Success") {
         Alert.alert("Success", response.data.responseData);
       }

@@ -93,7 +93,7 @@ const GroupListScreen = ({ navigation }) => {
           </ScrollView>
         </View>
         <View style={{ height: 60 }}>
-          <Footer isPeopleEnable={true} />
+          <Footer isPeopleEnable={true} navigation={navigation}/>
         </View>
       </SafeAreaView>
     </View>

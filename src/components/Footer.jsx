@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Pressable } from "react-native";
 import React from "react";
 import PersonIcon from "./PersonIcon";
 import PeoplesIcon from "./PeoplesIcon";
@@ -6,7 +6,7 @@ import AddButtonIcon from "./AddButton";
 import ActivityIcon from "./ActivityIcon";
 import AcountIcon from "./AccountIcon";
 
-const Footer = ({ isPeopleEnable }) => {
+const Footer = ({ isPeopleEnable, navigation }) => {
   return (
     <View style={styles.footer}>
       <View style={styles.freinds}>
@@ -15,8 +15,8 @@ const Footer = ({ isPeopleEnable }) => {
       <View style={styles.groups} isPeopleEnable={isPeopleEnable}>
         <PeoplesIcon />
       </View>
-      <View style={styles.addExpense}>
-        <AddButtonIcon />
+      <View>
+        <AddButtonIcon navigation={navigation} />
       </View>
       <View style={styles.addExpense}>
         <ActivityIcon />
